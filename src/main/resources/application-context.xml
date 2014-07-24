@@ -1,7 +1,114 @@
+<?xml version="1.0" encoding="UTF-8"?>
 <beans xmlns="http://www.springframework.org/schema/beans"
-    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-    xsi:schemaLocation="http://www.springframework.org/schema/beans
-    http://www.springframework.org/schema/beans/spring-beans-3.0.xsd">
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans 
+           http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+           http://www.springframework.org/schema/context
+           http://www.springframework.org/schema/context/spring-context-3.0.xsd">
 
+    <context:component-scan base-package="com.ricketysplit"/>
+
+    <bean id="greedy" class="com.ricketysplit.Greedy">
+        <constructor-arg ref="CoinCalculator"/>
+    </bean>
+
+    <bean id="CoinCalculator" class="com.ricketysplit.CoinCalculator">
+        <constructor-arg ref="USCurrency"/>
+    </bean>
+
+    <bean id="USCurrency" class="com.ricketysplit.CoinFactory">
+        <constructor-arg>
+            <list>
+                <ref bean="USdollarCoin"/>
+                <ref bean="USquarter"/>
+                <ref bean="USdime"/>
+                <ref bean="USnickel"/>
+                <ref bean="USpenny"/>
+            </list>
+        </constructor-arg>
+    </bean>
+
+    <bean id="USdollarCoin" class="com.ricketysplit.Coin">
+        <constructor-arg value="dollar coin"/>
+        <constructor-arg value="dollar coins"/>
+        <constructor-arg value="100"/>
+    </bean>
+    <bean id="USquarter" class="com.ricketysplit.Coin">
+        <constructor-arg value="quarter"/>
+        <constructor-arg value="quarters"/>
+        <constructor-arg value="25"/>
+    </bean>
+    <bean id="USdime" class="com.ricketysplit.Coin">
+        <constructor-arg value="dime"/>
+        <constructor-arg value="dimes"/>
+        <constructor-arg value="10"/>
+    </bean>
+    <bean id="USnickel" class="com.ricketysplit.Coin">
+        <constructor-arg value="nickel"/>
+        <constructor-arg value="nickels"/>
+        <constructor-arg value="5"/>
+    </bean>
+    <bean id="USpenny" class="com.ricketysplit.Coin">
+        <constructor-arg value="penny"/>
+        <constructor-arg value="pennies"/>
+        <constructor-arg value="1"/>
+    </bean>
+
+    <bean id="EUCurrency" class="com.ricketysplit.CoinFactory">
+        <constructor-arg>
+            <list>
+                <ref bean="EUoneCent"/>
+                <ref bean="EUtwoCent"/>
+                <ref bean="EUfiveCent"/>
+                <ref bean="EUtenCent"/>
+                <ref bean="EUtwentyCent"/>
+                <ref bean="EUfiftyCent"/>
+                <ref bean="EUoneEuro"/>
+                <ref bean="EUtwoEuro"/>
+            </list>
+        </constructor-arg>
+    </bean>
+
+    <bean id="EUoneCent" class="com.ricketysplit.Coin">
+        <constructor-arg value="€0.01 coin"/>
+        <constructor-arg value="€0.01 coins"/>
+        <constructor-arg value="1"/>
+    </bean>
+    <bean id="EUtwoCent" class="com.ricketysplit.Coin">
+        <constructor-arg value="€0.02 coin"/>
+        <constructor-arg value="€0.02 coins"/>
+        <constructor-arg value="2"/>
+    </bean>
+    <bean id="EUfiveCent" class="com.ricketysplit.Coin">
+        <constructor-arg value="€0.05 coin"/>
+        <constructor-arg value="€0.05 coins"/>
+        <constructor-arg value="5"/>
+    </bean>
+    <bean id="EUtenCent" class="com.ricketysplit.Coin">
+        <constructor-arg value="€0.10 coin"/>
+        <constructor-arg value="€0.10 coins"/>
+        <constructor-arg value="10"/>
+    </bean>
+    <bean id="EUtwentyCent" class="com.ricketysplit.Coin">
+        <constructor-arg value="€0.20 coin"/>
+        <constructor-arg value="€0.20 coins"/>
+        <constructor-arg value="20"/>
+    </bean>
+    <bean id="EUfiftyCent" class="com.ricketysplit.Coin">
+        <constructor-arg value="€0.50 coin"/>
+        <constructor-arg value="€0.50 coins"/>
+        <constructor-arg value="50"/>
+    </bean>
+    <bean id="EUoneEuro" class="com.ricketysplit.Coin">
+        <constructor-arg value="one euro coin"/>
+        <constructor-arg value="one euro coins"/>
+        <constructor-arg value="100"/>
+    </bean>
+    <bean id="EUtwoEuro" class="com.ricketysplit.Coin">
+        <constructor-arg value="two euro coin"/>
+        <constructor-arg value="two euro coins"/>
+        <constructor-arg value="200"/>
+    </bean>
 
 </beans>
