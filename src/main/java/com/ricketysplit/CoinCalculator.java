@@ -1,5 +1,6 @@
 package com.ricketysplit;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 import org.springframework.stereotype.Component;
@@ -15,7 +16,7 @@ import java.io.InputStreamReader;
  */
 @Component
 public class CoinCalculator {
-
+    @Autowired
     private CoinFactory coinFactory;
 
     public CoinCalculator(){
@@ -28,9 +29,8 @@ public class CoinCalculator {
 
     public String calculateChange(){
         System.out.println("What amount of change needs to be returned?");
-        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
         String amountOfChange = "";
-        try {
+        try (BufferedReader br = new BufferedReader(new InputStreamReader(System.in));){
             amountOfChange = br.readLine();
         } catch (IOException e) {
             System.out.println("Unable to read line, please try again");
@@ -77,6 +77,7 @@ public class CoinCalculator {
             coinFactory = (CoinFactory) context.getBean("EUCurrency");
             return true;
         }
+        coinFactory = (CoinFactory) context.getBean("USCurrency");
         return false;
     }
 }

@@ -10,8 +10,9 @@ import org.springframework.stereotype.Component;
  * Date: 6/18/14
  * Time: 3:05 AM
  */
+@Component
 public class Greedy {
-
+    @Autowired
     private CoinCalculator coinCalculator;
 
     public static void main(String[] varArgs) {
@@ -20,6 +21,10 @@ public class Greedy {
 
         Greedy obj = (Greedy) context.getBean("greedy");
         System.out.println(obj.coinCalculator.calculateChange());
+
+    }
+
+    public Greedy(){
 
     }
 
